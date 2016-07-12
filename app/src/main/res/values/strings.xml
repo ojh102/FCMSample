@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FCMSample</string>
+    <string name="fcm_server_key">AIzaSyBIHKKN4BUR5C_AL9KUI3sPUTMDLmzLii4</string>
 </resources>

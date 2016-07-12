@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.ojh.fcmsample;
+package com.github.ojh.fcmsample.service;
 
 import android.util.Log;
 

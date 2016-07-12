@@ -8,19 +8,22 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
+    <TextView
+        android:id="@+id/tvToken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/subscribeButton"
+        android:id="@+id/btnToken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="Subscribe To News" />
+        android:text="Get Token" />
 
     <Button
-        android:id="@+id/logTokenButton"
+        android:id="@+id/btnPush"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Log Token" />
+        android:text="PUSH" />
 
 </LinearLayout>

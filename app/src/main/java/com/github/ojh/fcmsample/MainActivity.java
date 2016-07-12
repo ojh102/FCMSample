@@ -20,9 +20,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.ojh.fcmsample.data.FCMData;
+import com.github.ojh.fcmsample.data.FCMRequest;
+import com.github.ojh.fcmsample.data.FCMResponse;
+import com.github.ojh.fcmsample.network.FCMApi;
+import com.github.ojh.fcmsample.network.NetWorkManager;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
         // [END handle_data_extras]
 
+        /* set topic
         Button subscribeButton = (Button) findViewById(R.id.subscribeButton);
         subscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +71,47 @@ public class MainActivity extends AppCompatActivity {
                 // [END subscribe_topics]
             }
         });
+        */
 
-        Button logTokenButton = (Button) findViewById(R.id.logTokenButton);
-        logTokenButton.setOnClickListener(new View.OnClickListener() {
+        final TextView tvToken = (TextView)findViewById(R.id.tvToken);
+
+        Button btnToken = (Button) findViewById(R.id.btnToken);
+        btnToken.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "InstanceID token: " + FirebaseInstanceId.getInstance().getToken());
+                String token = FirebaseInstanceId.getInstance().getToken();
+                Log.d(TAG, "InstanceID token: " + token);
+                tvToken.setText(token);
+
+            }
+        });
+
+        Button btnPush = (Button) findViewById(R.id.btnPush);
+        btnPush.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String token = FirebaseInstanceId.getInstance().getToken();
+
+                Call<FCMResponse> call = NetWorkManager.getInstance().getApi(FCMApi.class)
+                        .push("key="+getResources().getString(R.string.fcm_server_key)
+                                , new FCMRequest(new FCMData("FCM Title","Hello FCM!"), token));
+
+                call.enqueue(new Callback<FCMResponse>() {
+                    @Override
+                    public void onResponse(Call<FCMResponse> call, Response<FCMResponse> response) {
+                        Log.d("MainActivity", response.message());
+                        if(response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "푸쉬가 온다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "푸쉬 실패 ㅠ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FCMResponse> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
