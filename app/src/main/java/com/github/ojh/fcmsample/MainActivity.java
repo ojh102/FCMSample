@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }
         // [END handle_data_extras]
 
-        //set topic
+        //Set Topic
         Button subscribeButton = (Button) findViewById(R.id.subscribeButton);
         subscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
