@@ -29,6 +29,7 @@ import com.github.ojh.fcmsample.data.FCMResponse;
 import com.github.ojh.fcmsample.network.FCMApi;
 import com.github.ojh.fcmsample.network.NetWorkManager;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,18 +61,18 @@ public class MainActivity extends AppCompatActivity {
         }
         // [END handle_data_extras]
 
-        /* set topic
+        //set topic
         Button subscribeButton = (Button) findViewById(R.id.subscribeButton);
         subscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // [START subscribe_topics]
-                FirebaseMessaging.getInstance().subscribeToTopic("news");
+                FirebaseMessaging.getInstance().subscribeToTopic("test");
+                Toast.makeText(getApplicationContext(), "Subscribe Topic!!", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Subscribed to news topic");
                 // [END subscribe_topics]
             }
         });
-        */
 
         final TextView tvToken = (TextView)findViewById(R.id.tvToken);
 
