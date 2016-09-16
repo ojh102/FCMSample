@@ -102,9 +102,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<FCMResponse> call, Response<FCMResponse> response) {
                         Log.d("MainActivity", response.message());
                         if(response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "푸쉬가 온다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "push success", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "푸쉬 실패 ㅠ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "push fail", Toast.LENGTH_SHORT).show();
                         }
                     }
 
